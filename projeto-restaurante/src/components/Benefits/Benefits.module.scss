@@ -1,0 +1,17 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
+
+.benefits {
+  @include max-width;
+  margin-bottom: $marginBottom;
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .bottom {
+    display: flex;
+    justify-content: center;
+  }
+}
