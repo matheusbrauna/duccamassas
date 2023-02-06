@@ -4,6 +4,7 @@ import { Benefits } from 'components/Benefits/Benefits'
 import { Cardapio } from 'components/Cardapio/Cardapio'
 import { Header } from 'components/Header/Header'
 import { ImageText } from 'components/ImageText/ImageText'
+import { Reviews } from 'components/Reviews/Reviews'
 
 import { sanityClient } from 'lib/sanity'
 
@@ -39,6 +40,13 @@ export interface ICardapio {
   title: string
 }
 
+export interface IReview {
+  _id: string
+  image: UseNextSanityImageProps
+  name: string
+  review: string
+}
+
 async function getHeader() {
   const header = await sanityClient.fetch<IHeader>(`*[_type == "header"][0]`)
 
@@ -60,11 +68,19 @@ async function getAbout() {
 }
 
 async function getCardapio() {
-  const cardapio = await sanityClient.fetch<ICardapio>(
+  const cardapio = await sanityClient.fetch<ICardapio[]>(
     `*[_type == "cardapio"][0..3]`
   )
 
   return { cardapio }
+}
+
+async function getReviews() {
+  const reviews = await sanityClient.fetch<IReview[]>(
+    `*[_type == "reviews"][0..2]`
+  )
+
+  return { reviews }
 }
 
 export default async function Home() {
@@ -72,6 +88,7 @@ export default async function Home() {
   const { benefits } = await getBenefits()
   const { about } = await getAbout()
   const { cardapio } = await getCardapio()
+  const { reviews } = await getReviews()
 
   return (
     <>
@@ -80,6 +97,7 @@ export default async function Home() {
         <Benefits benefits={benefits} />
         <ImageText data={about} />
         <Cardapio cardapio={cardapio} />
+        <Reviews reviews={reviews} />
       </main>
     </>
   )
