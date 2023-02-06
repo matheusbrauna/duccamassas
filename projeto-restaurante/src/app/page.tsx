@@ -1,45 +1,42 @@
 import { UseNextSanityImageProps } from 'next-sanity-image'
 
 import { Benefits } from 'components/Benefits/Benefits'
+import { Cardapio } from 'components/Cardapio/Cardapio'
 import { Header } from 'components/Header/Header'
 import { ImageText } from 'components/ImageText/ImageText'
 
 import { sanityClient } from 'lib/sanity'
 
 export interface IHeader {
-  _createdAt: string
   _id: string
-  _rev: string
-  _type: string
-  _updatedAt: string
   subtitle: string
   title: string
   image: UseNextSanityImageProps
 }
 
 export interface IBenefit {
-  _createdAt: string
   _id: string
-  _rev: string
-  _type: string
-  _updatedAt: string
   subtitle: string
   title: string
   icon: UseNextSanityImageProps
 }
 
 export interface IAbout {
-  _createdAt: string
   _id: string
-  _rev: string
-  _type: string
-  _updatedAt: string
   button: string
   image: UseNextSanityImageProps
   text: string
   title: string
   top_title: string
   url: string
+}
+
+export interface ICardapio {
+  _id: string
+  button: string
+  image: UseNextSanityImageProps
+  category: string
+  title: string
 }
 
 async function getHeader() {
@@ -62,10 +59,19 @@ async function getAbout() {
   return { about }
 }
 
+async function getCardapio() {
+  const cardapio = await sanityClient.fetch<ICardapio>(
+    `*[_type == "cardapio"][0..3]`
+  )
+
+  return { cardapio }
+}
+
 export default async function Home() {
   const { header } = await getHeader()
   const { benefits } = await getBenefits()
   const { about } = await getAbout()
+  const { cardapio } = await getCardapio()
 
   return (
     <>
@@ -73,6 +79,7 @@ export default async function Home() {
       <main>
         <Benefits benefits={benefits} />
         <ImageText data={about} />
+        <Cardapio cardapio={cardapio} />
       </main>
     </>
   )

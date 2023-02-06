@@ -7,11 +7,7 @@ import { sanityClient } from 'lib/sanity'
 
 interface ImageTextProps {
   data: {
-    _createdAt: string
     _id: string
-    _rev: string
-    _type: string
-    _updatedAt: string
     button: string
     image: UseNextSanityImageProps
     text: string
