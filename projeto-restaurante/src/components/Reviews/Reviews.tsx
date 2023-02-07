@@ -1,7 +1,14 @@
+import { UseNextSanityImageProps } from 'next-sanity-image'
+
 import { Review } from './Review'
 import styles from './Reviews.module.scss'
 
-import { IReview } from 'app/page'
+export interface IReview {
+  _id: string
+  image: UseNextSanityImageProps
+  name: string
+  review: string
+}
 
 interface ReviewsProps {
   reviews: IReview[]

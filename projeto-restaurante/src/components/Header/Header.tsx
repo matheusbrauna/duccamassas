@@ -1,10 +1,16 @@
-import { useNextSanityImage } from 'next-sanity-image'
+import { useNextSanityImage, UseNextSanityImageProps } from 'next-sanity-image'
 import Image from 'next/image'
 
 import styles from './Header.module.scss'
 
-import { IHeader } from 'app/page'
 import { sanityClient } from 'lib/sanity'
+
+export interface IHeader {
+  _id: string
+  subtitle: string
+  title: string
+  image: UseNextSanityImageProps
+}
 
 interface HeaderProps {
   header: IHeader
@@ -20,7 +26,13 @@ export function Header({ header }: HeaderProps) {
         <p>{header.subtitle}</p>
       </div>
       <div className={styles.image}>
-        <Image src={imageProps.src} fill alt="Imagem de uma pizza" />
+        <Image
+          src={imageProps.src}
+          fill
+          alt="Imagem de uma pizza"
+          quality={100}
+          priority
+        />
       </div>
     </header>
   )

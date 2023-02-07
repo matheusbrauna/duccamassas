@@ -1,7 +1,15 @@
+import { UseNextSanityImageProps } from 'next-sanity-image'
+
 import styles from './Cardapio.module.scss'
 import { Item } from './Item'
 
-import { ICardapio } from 'app/page'
+export interface ICardapio {
+  _id: string
+  button: string
+  image: UseNextSanityImageProps
+  category: string
+  title: string
+}
 
 interface CardapioProps {
   cardapio: ICardapio[]

@@ -1,7 +1,14 @@
+import { UseNextSanityImageProps } from 'next-sanity-image'
+
 import { Benefit } from './Benefit'
 import styles from './Benefits.module.scss'
 
-import { IBenefit } from 'app/page'
+export interface IBenefit {
+  _id: string
+  subtitle: string
+  title: string
+  icon: UseNextSanityImageProps
+}
 
 interface BenefitsProps {
   benefits: IBenefit[]

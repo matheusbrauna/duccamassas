@@ -16,7 +16,14 @@ export function Item({ title, category, image }: ItemProps) {
 
   return (
     <div className={styles.item}>
-      <Image src={imageProps.src} alt={title} width={200} height={200} />
+      <Image
+        src={imageProps.src}
+        alt={title}
+        width={200}
+        height={200}
+        quality={100}
+        priority
+      />
       <h3>{category}</h3>
       <h4>{title}</h4>
     </div>
